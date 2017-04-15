@@ -5,6 +5,7 @@ const bodyParser    = require("body-parser");
 const app = module.exports = express();
 
 app.use(bodyParser.urlencoded({"extended": true}));
+app.use(bodyParser.json());
 
 //основное задание
 app.use('/v1', require('./v1'));
