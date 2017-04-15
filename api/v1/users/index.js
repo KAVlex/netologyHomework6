@@ -2,7 +2,7 @@
 
 const express   = require("express");
 const Users     = require("../../../model/users");
-const User     = require("../../../model/user");
+const User      = require("../../../model/user");
 
 let users  = new Users();
 

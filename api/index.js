@@ -1,7 +1,10 @@
 "use strict"
 
-const express = require("express");
+const express       = require("express");
+const bodyParser    = require("body-parser");
 const app = module.exports = express();
+
+app.use(bodyParser.urlencoded({"extended": true}));
 
 //основное задание
 app.use('/v1', require('./v1'));
