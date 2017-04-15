@@ -31,8 +31,21 @@ class Users extends Array{
         }
     }
 
-    findAll(callback){
-        callback(null, this);
+    findAll(callback, offset = 0, limit, fields){
+        let filter = (limit) ? this.slice(offset, parseInt(offset) + parseInt(limit))
+            : this.slice(offset)
+        if (fields){
+            let result = new Users();
+            filter.forEach((user) => {
+                let usr = Object.assign({}, user);
+                Object.keys(usr).forEach((key) => {
+                    if (!fields.includes(key)) delete usr[key];
+                });
+                result.push(usr);
+            });
+            return callback(null, result);
+        }
+        callback(null, filter);
     }
 
     findById(id, callback){
@@ -56,6 +69,10 @@ class Users extends Array{
         }else{
             callback(new Error('User not found'));
         }
+    }
+
+    removeAll(callback){
+        callback(null, this.splice(0, this.length));
     }
 
 }

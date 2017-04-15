@@ -14,7 +14,7 @@ const app = module.exports = express();
 app.get('/', function(req, res) {
     users.findAll((err, users) => {
         send(res, err, users);
-    });
+    }, req.query.offset, req.query.limit, req.query.fields);
 });
 
 app.post('/', function(req, res) {
@@ -45,6 +45,12 @@ app.put('/:id', function(req, res) {
 app.delete('/:id', function(req, res) {
     users.remove(req.params.id, (err, user) => {
         send(res, err, user);
+    })
+});
+
+app.delete('/', function(req, res) {
+    users.removeAll((err, users) => {
+        send(res, err, users);
     })
 });
 
